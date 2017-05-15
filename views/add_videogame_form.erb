@@ -1,4 +1,4 @@
-<form action="/add_videogame" method="post">
+<form action="/add_videogame/<%=@profile.id()%>" method="post">
   <label for="game_name">Enter in The name of the videogame</label>
   <input type="text" name="game_name">
   <button type="submit">Add game to database</button>

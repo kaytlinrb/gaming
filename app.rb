@@ -54,19 +54,26 @@ get("/add_videogame/:id") do
   erb(:add_videogame_form)
 end
 
-post("/add_videogame") do
+post("/add_videogame/:id") do
   game_name = params.fetch("game_name")
   Videogame.create(:game_name => game_name)
-  redirect("/add_videogame")
-end
-get('/videogame_list/:id') do
+  id = params.fetch("id").to_i
+  @profile = Profile.find(id)
   @videogames = Videogame.all()
   erb(:videogame_list)
 end
 
-get('/videogames/:id')do
+get('/videogame_list/:id') do
+  @videogames = Videogame.all()
   id = params.fetch("id").to_i
-  @videogame = Videogame.find(id)
+  @profile = Profile.find(id)
+  erb(:videogame_list)
+end
+
+get('/profile/:profile_id/videogames/:videogame_id')do
+  profile_id = params.fetch("profile_id").to_i
+  videogame_id = params.fetch("videogame_id").to_i
+  @videogame = Videogame.find(videogame_id)
 
   erb(:videogame)
 end
