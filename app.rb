@@ -5,7 +5,7 @@ require('sinatra/activerecord')
 also_reload('lib/**/*.rb')
 require('./lib/profile')
 require('./lib/videogame')
-require('./lib/opinions')
+require('./lib/opinion')
 require('pry')
 require("pg")
 
@@ -60,6 +60,7 @@ post("/add_videogame/:id") do
   id = params.fetch("id").to_i
   @profile = Profile.find(id)
   @videogames = Videogame.all()
+
   erb(:videogame_list)
 end
 
@@ -74,6 +75,19 @@ get('/profile/:profile_id/videogames/:videogame_id')do
   profile_id = params.fetch("profile_id").to_i
   videogame_id = params.fetch("videogame_id").to_i
   @videogame = Videogame.find(videogame_id)
+  @profile = Profile.find(profile_id)
+  @opinions = Opinion.find_by(:videogame_id => videogame_id)
 
+  binding.pry
   erb(:videogame)
+end
+
+#below
+post("/opinion/post/:profile_id/:videogame_id") do
+  profile_id = params.fetch("profile_id").to_i
+  videogame_id = params.fetch("videogame_id").to_i
+  post = params.fetch("post")
+  @opinion = Opinion.create(:profile_id => profile_id, :videogame_id => videogame_id, :post => post, :tag => nil)
+  @profile = Profile.find(profile_id)
+  erb(:profile)
 end

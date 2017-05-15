@@ -1,3 +1,17 @@
 <h1>
 <%= @videogame.game_name() %>
 </h1>
+
+<form action="/opinion/post/<%= @profile.id()%>/<%= @videogame.id()%>" method="post">
+  <label for="post">What are your thoughts on this game?</label>
+  <textarea class="form-control" name="post" rows="3"></textarea>
+
+  <button type="submit">Post</button>
+
+</form>
+
+<ul>
+  <% @opinions.each() do |opinion| %>
+   <li><%= opinion.post()%></li>
+   <%end%>
+</ul>
