@@ -1,0 +1,8 @@
+<form action="/add_videogame" method="post">
+  <label for="game_name">Enter in The name of the videogame</label>
+  <input type="text" name="game_name">
+  <button type="submit">Add game to database</button>
+</form>
+
+
+<a href="/profile/<%= @profile.id()%>">Back to your profile</a>

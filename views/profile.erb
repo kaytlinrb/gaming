@@ -1,3 +1,13 @@
 <h1>WERE HERE</h1>
 
-<h2><%= @profilename %></h2>
+<h2><%= @profile.username() %></h2>
+
+
+<button>
+<a href="/add_videogame/<%=@profile.id()%>">Click here to add a videogame to the database </a>
+</button>
+
+
+<button>
+<a href="/videogame_list/<%=@profile.id()%>">Checkout all the videogames people are talking about.</a>
+</button>

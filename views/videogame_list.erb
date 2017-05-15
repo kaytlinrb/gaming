@@ -1,0 +1,10 @@
+<% if @videogames.any?() %>
+    <ul>
+    <% @videogames.each() do |videogame| %>
+      <li><a href="/videogames/<%= videogame.id() %>"><%= videogame.game_name()%></a></li>
+    <% end %>
+    </ul>
+
+<% else %>
+    <h5>There are no videogames in the database.</h5>
+<% end %>
