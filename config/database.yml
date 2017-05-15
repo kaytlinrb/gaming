@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  database: gamer_social_development
+
+test:
+  adapter: postgresql
+  database: gamer_social_test
