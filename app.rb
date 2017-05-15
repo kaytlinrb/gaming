@@ -76,9 +76,10 @@ get('/profile/:profile_id/videogames/:videogame_id')do
   videogame_id = params.fetch("videogame_id").to_i
   @videogame = Videogame.find(videogame_id)
   @profile = Profile.find(profile_id)
+
   @opinions = Opinion.find_by(:videogame_id => videogame_id)
 
-  binding.pry
+
   erb(:videogame)
 end
 
