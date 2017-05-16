@@ -22,8 +22,14 @@ end
 
 get('/profile/:id') do
   id = params.fetch("id").to_i
-
   @profile = Profile.find(id)
+  opinion = @profile.opinions()
+
+    @profile.opinions.each() do |opinion|
+      name=Videogame.find(opinion.videogame_id().to_i).game_name()
+      opinion = opinion.post
+
+  end
   erb(:profile)
 end
 
