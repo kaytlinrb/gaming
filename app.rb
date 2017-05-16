@@ -20,12 +20,37 @@ get("/profile") do
   erb(:profile)
 end
 
+get("/all_users/:id") do
+  id = params.fetch("id").to_i
+  @user_profile = Profile.find(id)
+  @profiles = Profile.all()
+  erb(:all_users)
+end
+get("/profile/:profile_id/user_profile/:user_profile_id()") do
+    binding.pry
+  friend_id = params.fetch("profile_id").to_i
+  user_id = params.fetch("user_profile_id").to_i
+
+  @profile = Profile.find(friend_id)
+  erb(:profile)
+end
+# get('/profile/:profile_id/videogames/:videogame_id')do
+#   profile_id = params.fetch("profile_id").to_i
+#   videogame_id = params.fetch("videogame_id").to_i
+#   @videogame = Videogame.find(videogame_id)
+#   @profile = Profile.find(profile_id)
+#
+#   @opinions = Opinion.find_by(:videogame_id => videogame_id)
+#
+#   erb(:videogame)
+# end
+
 
 
 post("/profile") do
   username = params.fetch("username")
   password = params.fetch("password")
-
+  Friend.create(:username => username)
   Profile.create(:username => username, :password => password)
   erb(:success)
 end

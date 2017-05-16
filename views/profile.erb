@@ -12,6 +12,10 @@
 <a href="/videogame_list/<%=@profile.id()%>">Checkout all the videogames people are talking about.</a>
 </button>
 
+<button>
+<a href="/all_users/<%=@profile.id()%>">Search for Friends</a>
+</button>
+
 <ul>
   <% @profile.opinions.each() do |opinion| %>
    <li> <%=Videogame.find(opinion.videogame_id().to_i).game_name()%> <%=opinion.post%></li>
