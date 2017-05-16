@@ -11,3 +11,9 @@
 <button>
 <a href="/videogame_list/<%=@profile.id()%>">Checkout all the videogames people are talking about.</a>
 </button>
+
+<ul>
+  <% @profile.opinions.each() do |opinion| %>
+   <li><%= opinion.post()%></li>
+   <%end%>
+</ul>
