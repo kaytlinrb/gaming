@@ -20,18 +20,7 @@ get("/profile") do
   erb(:profile)
 end
 
-get('/profile/:id') do
-  id = params.fetch("id").to_i
-  @profile = Profile.find(id)
-  opinion = @profile.opinions()
 
-    @profile.opinions.each() do |opinion|
-      name=Videogame.find(opinion.videogame_id().to_i).game_name()
-      opinion = opinion.post
-
-  end
-  erb(:profile)
-end
 
 post("/profile") do
   username = params.fetch("username")
@@ -76,6 +65,18 @@ get('/videogame_list/:id') do
   @profile = Profile.find(id)
   erb(:videogame_list)
 end
+get('/profile/:id') do
+  id = params.fetch("id").to_i
+  @profile = Profile.find(id)
+  opinion = @profile.opinions()
+
+    @profile.opinions.each() do |opinion|
+      name=Videogame.find(opinion.videogame_id().to_i).game_name()
+      opinion = opinion.post
+
+  end
+  erb(:profile)
+end
 
 get('/profile/:profile_id/videogames/:videogame_id')do
   profile_id = params.fetch("profile_id").to_i
@@ -85,16 +86,16 @@ get('/profile/:profile_id/videogames/:videogame_id')do
 
   @opinions = Opinion.find_by(:videogame_id => videogame_id)
 
-
   erb(:videogame)
 end
 
-#below
+
 post("/opinion/post/:profile_id/:videogame_id") do
   profile_id = params.fetch("profile_id").to_i
   videogame_id = params.fetch("videogame_id").to_i
   post = params.fetch("post")
   @opinion = Opinion.create(:profile_id => profile_id, :videogame_id => videogame_id, :post => post, :tag => nil)
   @profile = Profile.find(profile_id)
+  @username = @profile.username()
   erb(:profile)
 end
